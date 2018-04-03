@@ -15,13 +15,19 @@ import javax.swing.JFrame;
 
 public class Sorting {
 
-    /** Increment to sweep the sort. */
+    /**
+     * Increment to sweep the sort.
+     */
     private static final int SORT_INCREMENT = 10000;
 
-    /** Total number of values to try. */
+    /**
+     * Total number of values to try.
+     */
     private static final int TOTAL_SORT_VALUES = 100;
 
-    /** Total data size. */
+    /**
+     * Total data size.
+     */
     private static final int TOTAL_INTEGER_VALUES = 1000000;
 
     /**
@@ -32,7 +38,25 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] bubbleSort(final int[] array) {
-        return null;
+        boolean isSorted = false;
+        while (true) {
+            for (int i = 1; i < array.length; i++) {
+                if (array[i] < array[i - 1]) {
+                    int temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                }
+            }
+            for (int i = 1; i < array.length; i++) {
+                isSorted = array[i] > array[i - 1];
+                if (!isSorted) {
+                    break;
+                }
+            }
+            if (isSorted) {
+                return array;
+            }
+        }
     }
 
     /**
@@ -63,7 +87,7 @@ public class Sorting {
      * Implement an in place merge algorithm that repeatedly picks the smaller of two numbers from
      * passed arrays and copies it to the returned array to produce a bigger sorted array
      *
-     * @param first the first array to merge
+     * @param first  the first array to merge
      * @param second the second array to merge
      * @return the sorted array, or null on failure
      */
@@ -115,7 +139,7 @@ public class Sorting {
      *
      * @param unused unused input arguments
      * @throws FileNotFoundException thrown if the file is not found
-     * @throws URISyntaxException thrown if the file is not found
+     * @throws URISyntaxException    thrown if the file is not found
      */
     @SuppressWarnings("checkstyle:magicnumber")
     public static void main(final String[] unused)
@@ -131,19 +155,19 @@ public class Sorting {
                     + "(1 for sorted, 2 for almost sorted, 3 for reverse sorted, 4 for random): ");
             int datatype = userInput.nextInt();
             switch (datatype) {
-                case 1 :
+                case 1:
                     dataFilename = "sorted.txt";
                     break;
-                case 2 :
+                case 2:
                     dataFilename = "almostsorted.txt";
                     break;
-                case 3 :
+                case 3:
                     dataFilename = "reverse.txt";
                     break;
                 case 4:
                     dataFilename = "random.txt";
                     break;
-                default :
+                default:
                     System.out.println("Please enter 1, 2, 3, or 4");
                     break;
             }
@@ -176,7 +200,8 @@ public class Sorting {
         int whichAlgorithm;
         while (true) {
             System.out.println("Enter the sorting algorithm that you want to use"
-                    + " (1 for bubble sort, 2 for insertion sort, 3 for merge sort, 4 for built-in): ");
+                    + " (1 for bubble sort, 2 for insertion sort,"
+                    + "3 for merge sort, 4 for built-in): ");
             whichAlgorithm = userInput.nextInt();
             if (whichAlgorithm > 0 && whichAlgorithm < 5) {
                 break;
@@ -201,13 +226,13 @@ public class Sorting {
             int[] sortedArray;
             long startTime = System.currentTimeMillis();
             switch (whichAlgorithm) {
-                case 1 :
+                case 1:
                     sortedArray = bubbleSort(unsortedArray);
                     break;
-                case 2 :
+                case 2:
                     sortedArray = selectionSort(unsortedArray);
                     break;
-                case 3 :
+                case 3:
                     sortedArray = mergeSort(unsortedArray);
                     break;
                 default:
